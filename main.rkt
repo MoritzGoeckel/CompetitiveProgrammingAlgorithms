@@ -47,6 +47,25 @@
 
 ; # Permutations
 
+(define mpermutations
+  (lambda (h t)
+      (if (empty? t)
+          h
+          (foldr
+            (lambda (x others)
+                    (let ((res (mpermutations (append h (list x))
+                                              (remove x t))))
+                      (if (list? (first res))
+                          (append res others)
+                          (list res))))
+            '()
+            t))))
+
+;(display (mpermutations '() '(1 2 3)))
+
+; There is a build-in permutations function
+;(display (permutations (list 0 1 2 3)))
+
 ; # Backtracking
 
 ; # Pruning
