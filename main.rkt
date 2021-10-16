@@ -67,6 +67,33 @@
 ;(display (permutations (list 0 1 2 3)))
 
 ; # Backtracking
+(define queens (lambda (n)
+               (letrec ((column (make-vector n #t))
+                        (diag1 (make-vector (* n 2) #t))
+                        (diag2 (make-vector (* n 2) #t))
+                        (count 0)
+                        (impl (lambda (y)
+                                      (if (= y n)
+                                          (set! count (+ 1 count))
+                                          (for ([x (in-range 0 n)])
+                                               (let ((c x)
+                                                     (d1 (+ x y))
+                                                     (d2 (+ (- x y) (- n 1))))
+                                                    (when (and (vector-ref column c)
+                                                               (vector-ref diag1 d1)
+                                                               (vector-ref diag2 d2))
+                                                        (begin
+                                                          (vector-set! column c #f)
+                                                          (vector-set! diag1 d1 #f)
+                                                          (vector-set! diag2 d2 #f)
+                                                          (impl (+ 1 y))
+                                                          (vector-set! column c #t)
+                                                          (vector-set! diag1 d1 #t)
+                                                          (vector-set! diag2 d2 #t)))))))))
+                 (begin (impl 0)
+                        count))))
+
+;(queens 8)
 
 ; # Pruning
 
