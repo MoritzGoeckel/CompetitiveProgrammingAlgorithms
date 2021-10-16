@@ -48,18 +48,18 @@
 ; # Permutations
 
 (define mpermutations
-  (lambda (h t)
-      (if (empty? t)
-          h
+  (lambda (front back)
+      (if (empty? back)
+          front
           (foldr
-            (lambda (x others)
-                    (let ((res (mpermutations (append h (list x))
-                                              (remove x t))))
-                      (if (list? (first res))
-                          (append res others)
-                          (list res))))
+            (lambda (elem others)
+                    (let ((result (mpermutations (append front (list elem))
+                                                 (remove elem back))))
+                      (if (list? (first result))
+                          (append result others)
+                          (list result))))
             '()
-            t))))
+            back))))
 
 ;(display (mpermutations '() '(1 2 3)))
 
