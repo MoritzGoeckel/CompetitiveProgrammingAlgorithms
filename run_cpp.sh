@@ -8,13 +8,13 @@
 
 # Run the first time
 clear
-g++ $1 && ./a.out
+g++ $1 -std=c++1z && ./a.out
 
 # Run with every recreation of the file
 inotifywait -q -e create -m . |
 while read -r directory events filename; do
     if [ "$filename" = $1 ]; then
         clear
-        g++ $1 && ./a.out
+        g++ $1 -std=c++1z && ./a.out
     fi
 done
