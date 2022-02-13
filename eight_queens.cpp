@@ -50,7 +50,7 @@ void solve(int board_size, int r, vector<bool>& rs, vector<bool>& cs,
 }
 
 int main(int argc, char* argv[]) {
-    int board_size = 9;
+    int board_size = 8;
 
     vector<bool> rs;
     rs.resize(board_size, false);
